@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{fragments/fragments :: styles}"></th:block>
+    <title>Document</title>
+</head>
+
+<body class="d-flex align-items-center justify-content-center">
+    <div class="d-flex flex-column align-items-center">
+        <h1>Clicca per entrare nel portale</h1>
+        <a th:href="@{/films}" class="btn btn-primary">Vai ai Film</a>
+    </div>
+</body>
+
+</html>
