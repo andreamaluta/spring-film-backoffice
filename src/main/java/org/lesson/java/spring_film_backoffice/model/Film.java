@@ -1,12 +1,16 @@
 package org.lesson.java.spring_film_backoffice.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -41,6 +45,10 @@ public class Film {
 
     @NotBlank(message = "The poster must exist and cannot be blank, null or empty")
     private String poster;
+
+    @ManyToMany
+    @JoinTable(name = "actor_film", joinColumns = @JoinColumn(name = "film_id"), inverseJoinColumns = @JoinColumn(name = "actor_id"))
+    private List<Actor> actors;
 
     public int getId() {
         return id;
@@ -104,6 +112,14 @@ public class Film {
 
     public void setPoster(String poster) {
         this.poster = poster;
+    }
+
+    public List<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
     }
 
 }
