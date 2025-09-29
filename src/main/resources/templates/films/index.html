@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{fragments/fragments :: styles}"></th:block>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragments/fragments :: navbar}"></th:block>
+
+
+
+
+    <div class="d-flex align-items-center my-3 flex-column">
+
+        <p th:if="${filmList.isEmpty()}" class="p-size">
+            Non ci sono film al momento
+        </p>
+
+        <div>
+            <a th:href="@{/films/create}" class="btn btn-primary">
+                Aggiungi un nuovo film
+            </a>
+        </div>
+
+        <table th:if="${!filmList.isEmpty()}">
+            <tr class="text-center">
+                <th>Titolo</th>
+                <th>Direttore</th>
+                <th>Poster</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="film : ${filmList}">
+                <td th:text="${film.title}"></td>
+                <td th:text="${film.director}"></td>
+                <td>
+                    <img th:src="${film.poster}" alt="foto" width="200px">
+                </td>
+                <td>
+                    <a th:href="@{/films/{id}(id=${film.id})}" class="btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </a>
+                    <a th:href="@{/films/edit/{id}(id=${film.id})}" class="btn">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <form class="d-flex justify-content-center" action="#"
+                        th:action="@{/films/delete/{id}(id=${film.id})}" method="post"
+                        onsubmit="return confirm('Sei sicuro di voler eliminare questo film?');">
+                        <button class="btn">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</body>
+
+</html>
