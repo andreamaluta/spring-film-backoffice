@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{fragments/fragments :: styles}"></th:block>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragments/fragments :: navbar}"></th:block>
+
+    <div class="d-flex justify-content-center" style="margin-top: 50px;">
+
+        <div class="card mb-3 w-75">
+            <div class="row g-0">
+                <div class="col-md-4 d-flex align-items-center">
+                    <img th:src="${actor.image}" class="card-img-top" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title mb-3" th:text="${actor.name}"></h3>
+                        <h5>Bio:</h5>
+                        <p class="card-text" th:text="${actor.bio}"></p>
+                        <h5>Sesso:</h5>
+                        <p class="card-text" th:text="${actor.gender}"></p>
+                        <h5>Data di Nascita:</h5>
+                        <p class="card-text" th:text="${actor.birth_date}"></p>
+                        <h5>Nazionalità:</h5>
+                        <p class="card-text" th:text="${actor.nationality}"></p>
+                        <a th:href="@{/actors}" class="btn btn-primary">Torna indietro</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:replace="~{fragments/fragments :: scripts}"></th:block>
+
+
+</body>
+
+</html>

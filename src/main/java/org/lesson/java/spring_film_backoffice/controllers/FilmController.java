@@ -2,6 +2,7 @@ package org.lesson.java.spring_film_backoffice.controllers;
 
 import org.lesson.java.spring_film_backoffice.model.Film;
 import org.lesson.java.spring_film_backoffice.repo.FilmRepository;
+import org.lesson.java.spring_film_backoffice.service.ActorService;
 import org.lesson.java.spring_film_backoffice.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class FilmController {
 
     @Autowired
     private FilmService filmService;
+
+    @Autowired
+    private ActorService actorService;
 
     @Autowired
     private FilmRepository filmRepository;
@@ -45,6 +49,7 @@ public class FilmController {
     public String create(Model model) {
 
         model.addAttribute("film", new Film());
+        model.addAttribute("actors", actorService.findAll());
 
         return "/films/create-or-edit";
 
@@ -68,6 +73,7 @@ public class FilmController {
         System.out.println("Data: " + filmService.getById(id).getPublication_date());
         model.addAttribute("film", filmService.getById(id));
         model.addAttribute("edit", true);
+        model.addAttribute("actors", actorService.findAll());
 
         return "/films/create-or-edit";
 

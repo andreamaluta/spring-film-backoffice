@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{fragments/fragments :: styles}"></th:block>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragments/fragments :: navbar}"></th:block>
+
+
+
+
+    <div class="d-flex align-items-center my-3 flex-column">
+
+        <p th:if="${actorList.isEmpty()}" class="p-size">
+            Non ci sono attori al momento
+        </p>
+
+        <div>
+            <a th:href="@{/actors/create}" class="btn btn-primary">
+                Aggiungi un nuovo attore
+            </a>
+        </div>
+
+        <table th:if="${!actorList.isEmpty()}" class="actorTable">
+            <tr class="text-center">
+                <th>Nome</th>
+                <th>Nazionalità</th>
+                <th>Immagine</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="actor : ${actorList}">
+                <td th:text="${actor.name}"></td>
+                <td th:text="${actor.nationality}"></td>
+                <td>
+                    <img th:src="${actor.image}" alt="foto" width="200px">
+                </td>
+                <td>
+                    <a th:href="@{/actors/{id}(id=${actor.id})}" class="btn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </a>
+                    <a th:href="@{/actors/edit/{id}(id=${actor.id})}" class="btn">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <form class="d-flex justify-content-center" action="#"
+                        th:action="@{/actors/delete/{id}(id=${actor.id})}" method="post"
+                        onsubmit="return confirm('Sei sicuro di voler eliminare questo attore?');">
+                        <button class="btn">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</body>
+
+</html>

@@ -58,6 +58,13 @@
                 <textarea id="plot" class="form-control" th:field="*{plot}"></textarea>
             </div>
 
+            <div>
+                <div class="form-check" th:each="actor : ${actors}">
+                    <input type="checkbox" th:id="|actor-${actor.id}|" th:field="*{actors}" th:value="${actor.id}">
+                    <label th:for="|actor-${actor.id}|" class="form-check-label" th:text="${actor.name}"></label>
+                </div>
+            </div>
+
             <div class="d-flex justify-content-between mt-4">
                 <input type="submit" class="btn btn-primary" value="Save">
                 <input type="reset" class="btn btn-warning" value="Reset all field">

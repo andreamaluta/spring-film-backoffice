@@ -9,10 +9,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "actors")
 public class Actor {
 
     @Id
@@ -30,6 +32,9 @@ public class Actor {
 
     @NotBlank(message = "The nationality must exist and cannot be blank, null or empty")
     private String nationality;
+
+    @NotBlank(message = "The image must exist and cannot be blank, null or empty")
+    private String image;
 
     @Lob
     private String bio;
@@ -83,6 +88,14 @@ public class Actor {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public List<Film> getFilms() {
