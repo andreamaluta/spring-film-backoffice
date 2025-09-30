@@ -1,8 +1,8 @@
 package org.lesson.java.spring_film_backoffice.controllers;
 
 import org.lesson.java.spring_film_backoffice.model.Actor;
-import org.lesson.java.spring_film_backoffice.repo.ActorRepository;
 import org.lesson.java.spring_film_backoffice.service.ActorService;
+import org.lesson.java.spring_film_backoffice.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,17 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/actors")
 public class ActorController {
 
-    @Autowired
-    private ActorRepository actorRepository;
+    private final FilmService filmService;
 
     @Autowired
     private ActorService actorService;
+
+    ActorController(FilmService filmService) {
+        this.filmService = filmService;
+    }
 
     @GetMapping
     public String index(Model model) {
@@ -39,6 +41,7 @@ public class ActorController {
     public String show(Model model, @PathVariable Integer id) {
 
         model.addAttribute("actor", actorService.getById(id));
+        model.addAttribute("films", actorService.getById(id).getFilms());
 
         return "/actors/show";
     }

@@ -41,6 +41,7 @@ public class FilmController {
     public String show(Model model, @PathVariable Integer id) {
 
         model.addAttribute("film", filmService.getById(id));
+        model.addAttribute("actors", filmService.getById(id).getActors());
 
         return "/films/show";
     }

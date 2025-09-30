@@ -14,10 +14,10 @@
 
         <div class="card mb-3 w-75">
             <div class="row g-0">
-                <div class="col-md-4 d-flex align-items-center">
+                <div class="col-md-4 d-flex align-items-start">
                     <img th:src="${film.poster}" class="card-img-top" alt="...">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <div class="card-body">
                         <h3 class="card-title mb-3" th:text="${film.title}"></h3>
                         <h5>Trama:</h5>
@@ -30,9 +30,28 @@
                         <p class="card-text" th:text="${film.publication_date}"></p>
                         <h5>Lingua originale:</h5>
                         <p class="card-text" th:text="${film.original_language}"></p>
-                        <a th:href="@{/films}" class="btn btn-primary">Torna indietro</a>
+                        <a th:href="@{/films}" class="btn btn-primary">Torna ai film</a>
                     </div>
                 </div>
+                <div class="col-md-2">
+                    <div class="card-body">
+                        <h5 class="mb-3">Attori:</h5>
+
+                        <div th:if="${actors.isEmpty()}">
+                            <p class="text-muted">Attori non presenti</p>
+                        </div>
+
+                        <div th:unless="${actors.isEmpty()}">
+                            <ul class="list-unstyled m-0 p-0">
+                                <li th:each="actor : ${actors}" class="my-2">
+                                    <a th:href="@{/actors/{id}(id=${actor.id})}" th:text="${actor.name}"
+                                        class="text-decoration-none text-dark"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 

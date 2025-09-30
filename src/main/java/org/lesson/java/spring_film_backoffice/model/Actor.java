@@ -12,6 +12,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 
 @Entity
 @Table(name = "actors")
@@ -25,6 +26,7 @@ public class Actor {
     private String name;
 
     @NotNull(message = "The birth date of the film must exist and cannot be null or empty")
+    @Past
     private LocalDate birth_date;
 
     @NotBlank(message = "The gender must exist and cannot be blank, null or empty")
