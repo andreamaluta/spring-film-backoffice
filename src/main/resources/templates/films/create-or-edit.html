@@ -58,10 +58,21 @@
                 <textarea id="plot" class="form-control" th:field="*{plot}"></textarea>
             </div>
 
-            <div>
-                <div class="form-check" th:each="actor : ${actors}">
-                    <input type="checkbox" th:id="|actor-${actor.id}|" th:field="*{actors}" th:value="${actor.id}">
-                    <label th:for="|actor-${actor.id}|" class="form-check-label" th:text="${actor.name}"></label>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <p>Attori:</p>
+                    <div class="form-check" th:each="actor : ${actors}">
+                        <input type="checkbox" th:id="|actor-${actor.id}|" th:field="*{actors}" th:value="${actor.id}">
+                        <label th:for="|actor-${actor.id}|" class="form-check-label" th:text="${actor.name}"></label>
+                    </div>
+                </div>
+
+                <div>
+                    <p>Generi:</p>
+                    <div class="form-check" th:each="genre : ${genres}">
+                        <input type="checkbox" th:id="|genre-${genre.id}|" th:field="*{genres}" th:value="${genre.id}">
+                        <label th:for="|genre-${genre.id}|" class="form-check-label" th:text="${genre.name}"></label>
+                    </div>
                 </div>
             </div>
 

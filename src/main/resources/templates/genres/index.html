@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{fragments/fragments :: styles}"></th:block>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragments/fragments :: navbar}"></th:block>
+
+
+
+
+    <div class="d-flex align-items-center my-3 flex-column">
+
+        <h1 class="mb-5">
+            Lista dei generi
+        </h1>
+
+        <a th:href="@{genres/create}" class="btn btn-primary mb-5">Aggiungi un nuovo genere</a>
+
+        <p th:if="${genreList.isEmpty()}" class="p-size">
+            Non ci sono generi al momento
+        </p>
+
+        <ul class="genre-list mb-5">
+            <li th:each="genre : ${genreList}" class="d-flex align-items-center justify-content-between">
+                [[${genre.name}]]
+                <div class="d-flex align-items-center ms-5">
+                    <a th:href="@{/genres/{id}(id=${genre.id})}" class="text-decoration-none text-dark">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </a>
+                    <a th:href="@{/genres/edit/{id}(id=${genre.id})}" class="btn">
+                        <i class="fa-solid fa-pen"></i>
+                    </a>
+                    <form class="p-0" action="#" th:action="@{/genres/delete/{id}(id=${genre.id})}" method="post"
+                        onsubmit="return confirm('Sei sicuro di voler eliminare questo genere?');">
+                        <button class="btn">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+</body>
+
+</html>

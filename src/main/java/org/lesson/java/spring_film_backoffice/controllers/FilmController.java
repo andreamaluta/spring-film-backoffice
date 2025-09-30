@@ -4,6 +4,7 @@ import org.lesson.java.spring_film_backoffice.model.Film;
 import org.lesson.java.spring_film_backoffice.repo.FilmRepository;
 import org.lesson.java.spring_film_backoffice.service.ActorService;
 import org.lesson.java.spring_film_backoffice.service.FilmService;
+import org.lesson.java.spring_film_backoffice.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,9 @@ public class FilmController {
     @Autowired
     private FilmRepository filmRepository;
 
+    @Autowired
+    private GenreService genreService;
+
     @GetMapping
     public String index(Model model) {
 
@@ -42,6 +46,7 @@ public class FilmController {
 
         model.addAttribute("film", filmService.getById(id));
         model.addAttribute("actors", filmService.getById(id).getActors());
+        model.addAttribute("genres", filmService.getById(id).getGenres());
 
         return "/films/show";
     }
@@ -51,6 +56,7 @@ public class FilmController {
 
         model.addAttribute("film", new Film());
         model.addAttribute("actors", actorService.findAll());
+        model.addAttribute("genres", genreService.findAll());
 
         return "/films/create-or-edit";
 
@@ -75,6 +81,7 @@ public class FilmController {
         model.addAttribute("film", filmService.getById(id));
         model.addAttribute("edit", true);
         model.addAttribute("actors", actorService.findAll());
+        model.addAttribute("genres", genreService.findAll());
 
         return "/films/create-or-edit";
 

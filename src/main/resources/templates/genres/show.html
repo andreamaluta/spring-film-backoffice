@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="~{fragments/fragments :: styles}"></th:block>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragments/fragments :: navbar}"></th:block>
+
+    <div class="d-flex align-items-center justify-content-center flex-column">
+        <h1 th:text="${genreItem.name}" class="my-4"></h1>
+
+        <p th:if="${genreFilms.isEmpty()}" class="p-size">
+            Non ci sono film collegati a questo genere al momento
+        </p>
+
+        <ul class="film-list list-unstyled p-0 my-4">
+            <li th:each="item : ${genreFilms}" class="my-2">
+                <a th:href="@{/films/{id}(id=${item.id})}" th:text="${item.title}"
+                    class="text-decoration-none text-dark film-link"></a>
+            </li>
+        </ul>
+
+        <a th:href="@{/genres}" class="btn btn-primary my-4">Torna ai generi</a>
+
+    </div>
+
+</body>
+
+</html>
