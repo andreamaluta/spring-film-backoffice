@@ -50,6 +50,10 @@ public class Film {
     @JoinTable(name = "actor_film", joinColumns = @JoinColumn(name = "film_id"), inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private List<Actor> actors;
 
+    @ManyToMany
+    @JoinTable(name = "genre_film", joinColumns = @JoinColumn(name = "film_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    private List<Genre> genres;
+
     public int getId() {
         return id;
     }
@@ -120,6 +124,14 @@ public class Film {
 
     public void setActors(List<Actor> actors) {
         this.actors = actors;
+    }
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
     }
 
 }
