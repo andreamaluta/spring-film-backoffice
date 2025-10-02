@@ -1,7 +1,6 @@
 package org.lesson.java.spring_film_backoffice.controllers;
 
 import org.lesson.java.spring_film_backoffice.model.Film;
-import org.lesson.java.spring_film_backoffice.repo.FilmRepository;
 import org.lesson.java.spring_film_backoffice.service.ActorService;
 import org.lesson.java.spring_film_backoffice.service.FilmService;
 import org.lesson.java.spring_film_backoffice.service.GenreService;
@@ -26,9 +25,6 @@ public class FilmController {
 
     @Autowired
     private ActorService actorService;
-
-    @Autowired
-    private FilmRepository filmRepository;
 
     @Autowired
     private GenreService genreService;
@@ -66,6 +62,10 @@ public class FilmController {
     private String store(@Valid @ModelAttribute("film") Film formFilm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
+            // nel caso di errori di validazione devo ripassare gli attributi per far si che
+            // ci siano i form-check anche in caso di validazione errata
+            model.addAttribute("actors", actorService.findAll());
+            model.addAttribute("genres", genreService.findAll());
             return "/films/create-or-edit";
         }
 
@@ -91,6 +91,8 @@ public class FilmController {
     private String update(@Valid @ModelAttribute("film") Film formFilm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("actors", actorService.findAll());
+            model.addAttribute("genres", genreService.findAll());
             return "/films/create-or-edit";
         }
 

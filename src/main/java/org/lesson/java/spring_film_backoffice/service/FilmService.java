@@ -1,6 +1,7 @@
 package org.lesson.java.spring_film_backoffice.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.lesson.java.spring_film_backoffice.model.Film;
 import org.lesson.java.spring_film_backoffice.repo.FilmRepository;
@@ -21,6 +22,10 @@ public class FilmService {
 
     public Film getById(int id) {
         return filmRepository.findById(id).get();
+    }
+
+    public Optional<Film> findById(Integer id) {
+        return filmRepository.findById(id);
     }
 
     public Film create(Film film) {

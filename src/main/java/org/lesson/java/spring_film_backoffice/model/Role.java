@@ -1,8 +1,6 @@
 package org.lesson.java.spring_film_backoffice.model;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,19 +11,18 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "genres")
-public class Genre {
+@Table(name = "roles")
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "Name must exist and cannot be blank, null or empty")
+    @NotBlank(message = "The name cannot be blank, null or empty")
     private String name;
 
-    @ManyToMany(mappedBy = "genres")
-    @JsonIgnore
-    private List<Film> films;
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
 
     public int getId() {
         return id;
@@ -43,12 +40,12 @@ public class Genre {
         this.name = name;
     }
 
-    public List<Film> getFilms() {
-        return films;
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setFilms(List<Film> films) {
-        this.films = films;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
 }

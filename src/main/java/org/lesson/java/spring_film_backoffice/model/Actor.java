@@ -3,6 +3,8 @@ package org.lesson.java.spring_film_backoffice.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -42,6 +44,7 @@ public class Actor {
     private String bio;
 
     @ManyToMany(mappedBy = "actors")
+    @JsonIgnore
     private List<Film> films;
 
     public int getId() {
