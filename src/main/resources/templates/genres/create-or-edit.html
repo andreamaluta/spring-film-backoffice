@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <th:block th:replace="~{fragments/fragments :: styles}"></th:block>
     <title>Document</title>
 </head>
 
-<body>
+<body sec:authorize="hasAuthority('ADMIN')">
 
     <th:block th:replace="~{fragments/fragments :: navbar}"></th:block>
 

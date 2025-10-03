@@ -24,7 +24,7 @@
                         Welcome to Films
                     </div>
                 </div>
-                <div class="col-10 px-3 py-4 d-flex align-items-center">
+                <div class="col-7 px-3 py-4 d-flex align-items-center">
                     <div class="me-5">
                         <a th:href="@{/films}" class="nav-link">Film</a>
                     </div>
@@ -34,6 +34,11 @@
                     <div class="me-5">
                         <a th:href="@{/genres}" class="nav-link">Generi</a>
                     </div>
+                </div>
+                <div class="col-3 d-flex align-items-center justify-content-end">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>

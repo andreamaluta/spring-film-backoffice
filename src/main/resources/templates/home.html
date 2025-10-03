@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -9,10 +9,19 @@
 </head>
 
 <body class="d-flex align-items-center justify-content-center">
-    <div class="d-flex flex-column align-items-center">
+    <div class="d-flex flex-column align-items-center" sec:authorize="hasAuthority('ADMIN')">
         <h1>Clicca per entrare nel portale</h1>
         <a th:href="@{/films}" class="btn btn-primary">Vai ai Film</a>
     </div>
+
+    <div class="d-flex flex-column align-items-center" sec:authorize="hasAuthority('USER')">
+        <h1 class="mb-5">Non hai autorizzazioni per utilizzare questo portale</h1>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" style="font-size: 24px;">Logout</button>
+        </form>
+
+    </div>
+
 </body>
 
 </html>
