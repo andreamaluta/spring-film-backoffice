@@ -52,4 +52,9 @@ public class GenreService {
         genreRepository.delete(genreToDelete);
     }
 
+    public List<Film> getFilmsByGenreId(int genreId) {
+        Genre genre = genreRepository.findById(genreId).orElseThrow();
+        return genre.getFilms();
+    }
+
 }

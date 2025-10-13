@@ -32,6 +32,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/films", "/films/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/").hasAnyAuthority("ADMIN", "USER")
                         .requestMatchers("/api/films", "/api/films/**").permitAll()
+                        .requestMatchers("/api/genres", "/api/genres/**", "/api/films/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form.disable())
                 .httpBasic(httpBasic -> {
