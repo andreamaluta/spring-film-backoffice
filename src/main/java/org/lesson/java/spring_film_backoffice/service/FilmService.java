@@ -28,6 +28,10 @@ public class FilmService {
         return filmRepository.findById(id);
     }
 
+    public List<Film> findByTitle(String name) {
+        return filmRepository.findByTitleContaining(name);
+    }
+
     public Film create(Film film) {
         return filmRepository.save(film);
     }
