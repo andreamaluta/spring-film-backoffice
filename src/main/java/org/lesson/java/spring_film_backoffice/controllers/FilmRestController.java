@@ -36,6 +36,11 @@ public class FilmRestController {
 
     }
 
+    @GetMapping("/ordered")
+    public List<Film> index() {
+        return filmService.findOrdered();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Film> show(@PathVariable Integer id) {
 

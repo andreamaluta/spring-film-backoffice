@@ -17,10 +17,25 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+    // security chain per le api abilitando cors
+    @Bean
+    SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
+        http
+                .securityMatcher("/api/**")
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> {
+                })
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/**").permitAll()
+                        .anyRequest().authenticated())
+                .httpBasic(httpBasic -> {
+                });
+        return http.build();
+    }
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf(csrf -> csrf.disable())
+        http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**", "/style.css").permitAll()
                         .requestMatchers("/films/create", "/films/edit/**").hasAuthority("ADMIN")
@@ -30,19 +45,15 @@ public class SecurityConfiguration {
                         .requestMatchers("/actors", "/actors/**").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/actors/**").hasAuthority("ADMIN")
                         .requestMatchers("/films", "/films/**").hasAnyAuthority("ADMIN")
-                        .requestMatchers("/").hasAnyAuthority("ADMIN", "USER")
-                        .requestMatchers("/api/films", "/api/films/**").permitAll()
-                        .requestMatchers("/api/genres", "/api/genres/**", "/api/films/**").permitAll()
+                        .requestMatchers("/").hasAnyAuthority("ADMIN")
                         .anyRequest().authenticated())
-                .formLogin(form -> form.disable())
-                .httpBasic(httpBasic -> {
-                }) // equivalente a Customizer.withDefaults()
-                .build();
+                .formLogin(Customizer.withDefaults());
+        return http.build();
     }
 
     // bean di cors
     @Bean
-    public WebMvcConfigurer corsConfigurer() {
+    WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {

@@ -9,4 +9,6 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
 
     public List<Film> findByTitleContaining(String name);
 
+    public List<Film> findAllByOrderByTitleAsc();
+
 }

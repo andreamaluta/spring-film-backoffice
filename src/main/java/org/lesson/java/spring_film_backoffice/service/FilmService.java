@@ -48,4 +48,8 @@ public class FilmService {
 
     }
 
+    public List<Film> findOrdered() {
+        return filmRepository.findAllByOrderByTitleAsc();
+    }
+
 }
